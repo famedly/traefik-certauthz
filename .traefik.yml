@@ -1,0 +1,6 @@
+displayName: Client Certificate Authorization Plugin
+type: middleware
+
+import: github.com/famedly/traefik-certauthz
+
+summary: "Authorize requests based on the TLS client certificate"
