@@ -1,4 +1,4 @@
-package certauthz
+package traefik_certauthz
 
 import (
 	"context"

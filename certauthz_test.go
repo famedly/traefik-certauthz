@@ -1,4 +1,4 @@
-package certauthz_test
+package traefik_certauthz_test
 
 import (
 	"context"
@@ -14,7 +14,7 @@ import (
 
 // Config failures
 func TestConfigFailure1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -23,18 +23,18 @@ func TestConfigFailure1(t *testing.T) {
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 	
-	_, err := certauthz.New(ctx, next, cfg, "certauthz")
+	_, err := traefik_certauthz.New(ctx, next, cfg, "certauthz")
 	if err == nil {
 		t.Error("Expected config failure (both domain and regex configured), but succeeded")
 	}
 }
 
 func TestConfigFailure2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 	
-	_, err := certauthz.New(ctx, next, cfg, "certauthz")
+	_, err := traefik_certauthz.New(ctx, next, cfg, "certauthz")
 	if err == nil {
 		t.Error("Expected config failure (neither domain nor regex configured), but succeeded")
 	}
@@ -42,7 +42,7 @@ func TestConfigFailure2(t *testing.T) {
 
 // Domain successes
 func TestCertauthzDomainsSuccess1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -53,7 +53,7 @@ func TestCertauthzDomainsSuccess1(t *testing.T) {
 }
 
 func TestCertauthzDomainsSuccess2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 		"example.com",
@@ -65,7 +65,7 @@ func TestCertauthzDomainsSuccess2(t *testing.T) {
 }
 
 func TestCertauthzDomainsSuccess3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -77,7 +77,7 @@ func TestCertauthzDomainsSuccess3(t *testing.T) {
 }
 
 func TestCertauthzDomainsSuccess4(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"eXamp1e.org",
 		"example.net",
@@ -91,7 +91,7 @@ func TestCertauthzDomainsSuccess4(t *testing.T) {
 
 // TODO: implement wildcard SANs with proper checks for bad input
 // func TestCertauthzDomainsSuccess5(t *testing.T) {
-// 	cfg := certauthz.CreateConfig()
+// 	cfg := traefik_certauthz.CreateConfig()
 // 	cfg.Domains = []string{
 // 		"sub.example.org",
 // 	}
@@ -103,7 +103,7 @@ func TestCertauthzDomainsSuccess4(t *testing.T) {
 
 // Domain failures
 func TestCertauthzDomainsFailure1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -112,7 +112,7 @@ func TestCertauthzDomainsFailure1(t *testing.T) {
 }
 
 func TestCertauthzDomainsFailure2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -123,7 +123,7 @@ func TestCertauthzDomainsFailure2(t *testing.T) {
 }
 
 func TestCertauthzDomainsFailure3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 		"example.net",
@@ -135,7 +135,7 @@ func TestCertauthzDomainsFailure3(t *testing.T) {
 }
 
 func TestCertauthzDomainsFailure4(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 		"example.net",
@@ -148,7 +148,7 @@ func TestCertauthzDomainsFailure4(t *testing.T) {
 }
 
 func TestCertauthzDomainsFailure5(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -160,7 +160,7 @@ func TestCertauthzDomainsFailure5(t *testing.T) {
 }
 
 func TestCertauthzDomainsFailure6(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.org",
 	}
@@ -173,7 +173,7 @@ func TestCertauthzDomainsFailure6(t *testing.T) {
 
 // Wildcard domain successes
 func TestCertauthzWildcardDomainsSuccess1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -184,7 +184,7 @@ func TestCertauthzWildcardDomainsSuccess1(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -196,7 +196,7 @@ func TestCertauthzWildcardDomainsSuccess2(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 		"example.com",
@@ -209,7 +209,7 @@ func TestCertauthzWildcardDomainsSuccess3(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess4(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 		"example.com",
@@ -221,7 +221,7 @@ func TestCertauthzWildcardDomainsSuccess4(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess5(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"example.*",
 	}
@@ -232,7 +232,7 @@ func TestCertauthzWildcardDomainsSuccess5(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess6(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: don't allow this, change test and document breaking change
 	// require * to be followed by .
 	cfg.Domains = []string{
@@ -245,7 +245,7 @@ func TestCertauthzWildcardDomainsSuccess6(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsSuccess7(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: don't allow this, change test and document breaking change
 	// require * to be followed by .
 	cfg.Domains = []string{
@@ -259,7 +259,7 @@ func TestCertauthzWildcardDomainsSuccess7(t *testing.T) {
 
 // Wildcard domain failures
 func TestCertauthzWildcardDomainsFailure1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -270,7 +270,7 @@ func TestCertauthzWildcardDomainsFailure1(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsFailure2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -281,7 +281,7 @@ func TestCertauthzWildcardDomainsFailure2(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsFailure3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -292,7 +292,7 @@ func TestCertauthzWildcardDomainsFailure3(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsFailure4(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Domains = []string{
 		"*.example.org",
 	}
@@ -303,7 +303,7 @@ func TestCertauthzWildcardDomainsFailure4(t *testing.T) {
 }
 
 func TestCertauthzWildcardDomainsFailure5(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: don't allow this, change test and document breaking change
 	// require * to be followed by .
 	cfg.Domains = []string{
@@ -317,7 +317,7 @@ func TestCertauthzWildcardDomainsFailure5(t *testing.T) {
 
 // Regex successes
 func TestCertauthzRegexSuccess1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$"
 	sans := []string{
 		"example.org",
@@ -326,7 +326,7 @@ func TestCertauthzRegexSuccess1(t *testing.T) {
 }
 
 func TestCertauthzRegexSuccess2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$|^[^.]+.example.org$"
 	sans := []string{
 		"sub.example.org",
@@ -335,7 +335,7 @@ func TestCertauthzRegexSuccess2(t *testing.T) {
 }
 
 func TestCertauthzRegexSuccess3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$|^[^.]+.example.org$"
 	sans := []string{
 		"example.org",
@@ -345,7 +345,7 @@ func TestCertauthzRegexSuccess3(t *testing.T) {
 }
 
 func TestCertauthzRegexSuccess4(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: add a warning for not enclosing in ^$, change test to expect it
 	cfg.Regex = "example.org"
 	sans := []string{
@@ -355,7 +355,7 @@ func TestCertauthzRegexSuccess4(t *testing.T) {
 }
 
 func TestCertauthzRegexSuccess5(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: add a warning for not enclosing in ^$, change test to expect it
 	cfg.Regex = "example.org"
 	sans := []string{
@@ -365,7 +365,7 @@ func TestCertauthzRegexSuccess5(t *testing.T) {
 }
 
 func TestCertauthzRegexSuccess6(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	// TODO: add a warning for not enclosing in ^$, change test to expect it
 	cfg.Regex = "example.org"
 	sans := []string{
@@ -376,7 +376,7 @@ func TestCertauthzRegexSuccess6(t *testing.T) {
 
 // Regex failures
 func TestCertauthzRegexFailure1(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$"
 	sans := []string{
 		"examplexorg",
@@ -385,7 +385,7 @@ func TestCertauthzRegexFailure1(t *testing.T) {
 }
 
 func TestCertauthzRegexFailure2(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$"
 	sans := []string{
 		"example.org.badactor.com",
@@ -394,7 +394,7 @@ func TestCertauthzRegexFailure2(t *testing.T) {
 }
 
 func TestCertauthzRegexFailure3(t *testing.T) {
-	cfg := certauthz.CreateConfig()
+	cfg := traefik_certauthz.CreateConfig()
 	cfg.Regex = "^example[.]org$"
 	sans := []string{
 		"example.org.badactor.com",
@@ -403,11 +403,11 @@ func TestCertauthzRegexFailure3(t *testing.T) {
 }
 
 
-func testValidConfig(t *testing.T, cfg *certauthz.Config, sans []string, expected string) {
+func testValidConfig(t *testing.T, cfg *traefik_certauthz.Config, sans []string, expected string) {
 	ctx := context.Background()
 	next := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {})
 	
-	handler, err := certauthz.New(ctx, next, cfg, "certauthz")
+	handler, err := traefik_certauthz.New(ctx, next, cfg, "certauthz")
 	if err != nil {
 		t.Fatal(err)
 	}
