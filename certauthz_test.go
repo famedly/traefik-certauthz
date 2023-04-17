@@ -9,7 +9,7 @@ import (
 	"testing"
 	// "fmt"
 
-	"github.com/famedly/traefik_certauthz_plugin"
+	"github.com/famedly/traefik-certauthz"
 )
 
 // Config failures

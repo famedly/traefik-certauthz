@@ -1,3 +1,3 @@
-module github.com/famedly/traefik_certauthz_plugin
+module github.com/famedly/traefik-certauthz
 
 go 1.19
